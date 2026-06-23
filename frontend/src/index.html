@@ -30,99 +30,61 @@
     <header class="section-header">
       <div>
         <h1 class="section-header__title">Mis Recetas</h1>
-        <p class="section-header__subtitle">3 recetas guardadas</p>
+        <p class="section-header__subtitle" id="recipe-count">0 recetas guardadas</p>
       </div>
       <button class="btn btn--primary">+ Nueva receta</button>
     </header>
 
     <!-- Grid de tarjetas -->
-    <div class="recipes-grid">
-
-      <!-- Tarjeta de receta -->
-      <article class="recipe-card">
-        <div class="recipe-card__header">
-          <h2 class="recipe-card__name">Avena Proteica Matutina</h2>
-          <span class="recipe-card__portions">2 porciones</span>
-        </div>
-
-        <div class="macro-bar">
-          <div class="macro-bar__segment macro-bar__segment--protein"  style="flex: 44"></div>
-          <div class="macro-bar__segment macro-bar__segment--carbs"    style="flex: 88"></div>
-          <div class="macro-bar__segment macro-bar__segment--fat"      style="flex: 9"></div>
-        </div>
-
-        <div class="macro-grid">
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--calories">299</span>
-            <span class="macro-item__label">kcal</span>
-          </div>
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--protein">22g</span>
-            <span class="macro-item__label">proteína</span>
-          </div>
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--carbs">44g</span>
-            <span class="macro-item__label">carbos</span>
-          </div>
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--fat">4.7g</span>
-            <span class="macro-item__label">grasa</span>
-          </div>
-        </div>
-
-        <div class="recipe-card__footer">
-          <span class="recipe-card__tag">🌅 Desayuno</span>
-          <button class="btn btn--ghost btn--sm">Ver receta →</button>
-        </div>
-      </article>
-
-      <!-- Repite la tarjeta con tu "Comida Clásica" -->
-      <article class="recipe-card">
-        <div class="recipe-card__header">
-          <h2 class="recipe-card__name">Comida Clásica</h2>
-          <span class="recipe-card__portions">3 porciones</span>
-        </div>
-
-        <div class="macro-bar">
-          <div class="macro-bar__segment macro-bar__segment--protein"  style="flex: 54"></div>
-          <div class="macro-bar__segment macro-bar__segment--carbs"    style="flex: 96"></div>
-          <div class="macro-bar__segment macro-bar__segment--fat"      style="flex: 25"></div>
-        </div>
-
-        <div class="macro-grid">
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--calories">318</span>
-            <span class="macro-item__label">kcal</span>
-          </div>
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--protein">18g</span>
-            <span class="macro-item__label">proteína</span>
-          </div>
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--carbs">32g</span>
-            <span class="macro-item__label">carbos</span>
-          </div>
-          <div class="macro-item">
-            <span class="macro-item__value macro-item__value--fat">8.4g</span>
-            <span class="macro-item__label">grasa</span>
-          </div>
-        </div>
-
-        <div class="recipe-card__footer">
-          <span class="recipe-card__tag">🍽️ Almuerzo</span>
-          <button class="btn btn--ghost btn--sm">Ver receta →</button>
-        </div>
-      </article>
-
-      <!-- Tarjeta para agregar nueva receta -->
-      <article class="recipe-card recipe-card--empty">
-        <span class="recipe-card__empty-icon">+</span>
-        <p class="recipe-card__empty-text">Agregar receta</p>
-      </article>
+    <div class="recipes-grid" id="recipes-grid">
 
     </div>
   </main>
 
   <script src="app.js"></script>
+    <!-- Modal nueva receta -->
+    <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+        <div class="modal__header">
+        <h2 class="modal__title">Nueva Receta</h2>
+        <button class="modal__close" id="modal-close">✕</button>
+        </div>
+
+        <div class="modal__body">
+        <div class="form-group">
+            <label class="form-label">Nombre de la receta</label>
+            <input class="form-input" type="text" id="recipe-name" placeholder="Ej: Bowl de quinoa">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Porciones</label>
+            <input class="form-input" type="number" id="recipe-portions" value="1" min="1">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Categoría</label>
+            <select class="form-input" id="recipe-tag">
+            <option value="🌅 Desayuno">🌅 Desayuno</option>
+            <option value="🍽️ Almuerzo">🍽️ Almuerzo</option>
+            <option value="🌙 Cena">🌙 Cena</option>
+            <option value="🥪 Snack">🥪 Snack</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Ingredientes</label>
+            <div id="ingredients-list"></div>
+            <button class="btn btn--ghost btn--sm" id="add-ingredient-btn" style="margin-top:8px">
+            + Agregar ingrediente
+            </button>
+        </div>
+        </div>
+
+        <div class="modal__footer">
+        <button class="btn btn--ghost" id="cancel-btn">Cancelar</button>
+        <button class="btn btn--primary" id="save-recipe-btn">Guardar receta</button>
+        </div>
+    </div>
+    </div>
 </body>
 </html>
